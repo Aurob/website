@@ -1,0 +1,90 @@
+{
+    "header": {
+        "title": "Home",
+        "nav_logo":"",
+        "media_path": "/files/"
+    },
+    "data":
+    {
+        "home" : {
+            "subject":"About Me",
+            "id":"home",
+            "title":"Robert Aucoin",
+            "sub_title":"Software Developer, Shreveport, LA.</i>",
+            "content":"<a href='https://www.linkedin.com/in/robfau'>Linkedin</a>",
+            "image": "me.gif",
+            "nav_logo":"me2.png",
+            "default": true,
+            "width":"100%"
+        },
+        "resume" : {
+            "subject":"Resume",
+            "id":"resume",
+            "title":"Robert Aucoin Resume",
+            "sub_title":"Full Stack Software Developer/Engineer",
+            "content":"<iframe src=\"/files/Resume.pdf\"></iframe>",
+            "width":"100%"
+        },
+        "game" : {
+            "subject":"Game Dev",
+            "id":"game",
+            "title":"2D Game Engine Development",
+            "sub_title":"C++ SDL Engine compiled with WebAssembly",
+            "content":"<h3>Custom built basic 3D scene</h3><a href=\"/test\"><img loading=\"lazy\"  src=\"/files/carpeted.png\"><h3>ECS prototype with basic physics</h3><a href=\"https://aurob.github.io/ProtoGame/#game\"><img loading=\"lazy\" src=\"/files/room.png\"></a><br>2D Procedural world, simple combat system<a target=\"_blank\" href=\"/GameEngine2D\"><img loading=\"lazy\"  src=\"/files/game.png\"></a>",
+            "image":"",
+            "nav_logo":"dio.gif",
+            "width":"100%"
+        },
+        "art" : {
+            "subject":"Software Art",
+            "id":"art",
+            "title":"Generative-esque Art",
+            "sub_title":"Complex imagery from simple rules",
+            "content":"<p>Kaleidoscopic effect made from gifs created from <a href='https://developers.google.com/maps/documentation/javascript/streetview'>Google Street View Panoramic images</a></p>",
+            "image":[
+                "trip/21.42.gif",
+                "trip/37.98.gif",
+                "trip/42.99.gif",
+                "trip/47.27.gif",
+                "trip/47.53.gif",
+                "trip/48.07.gif",
+                "trip/64.29.gif"
+            ],
+            "nav_logo":"/trip/64.29.gif",
+            "width":"100%"
+        },
+        "earth" : {
+            "subject":"Random Earth",
+            "id":"earth",
+            "title":"Somewhere on Earth",
+            "sub_title":"Using <a href=\"https://docs.microsoft.com/en-us/bingmaps/rest-services/imagery/get-a-static-map#get-a-map-with-aerial-imagery-based-on-a-query\">Bing Maps Imagery API</a>",
+            "content":"<div id='sat_info'><div id='country'></div></div><button id=\"bgsave\">Save Current Background</button><br><button onclick='gotoEarth()' id=\"goto\">Go to this location in Google Earth</button><br><button onclick=\"generate_sat_bg()\" id=\"link\">New Background</button><script></script>",
+            "width":"100%",
+            "nav_logo":"earth.gif"
+        },
+        "space" : {
+            "subject":"Space",
+            "id":"planets",
+            "title":"First HTML project 2015",
+            "sub_title":"information on Earth, Jupiter, Pluto, and the Sun",
+            "content":"<iframe src='/space'></iframe>",
+            "width":"100%",
+            "nav_logo":"earth.gif"
+        },
+        "other" : {
+            
+            "subject":"Projects",
+            "id":"other",
+            "title":"Misc Projects",
+            "sub_title":"",
+            "content":"<h2><a href='/mediamove'>JavaScript desktop-style UI</a></h2><br><iframe src='/mediamove'></iframe><br><h2><a href='/nyccam'>New York City Traffic Camera Viewer</a></h2><br><iframe src='/nyccam'></iframe>",
+            "width":"100%",
+            "nav_logo":"robprog.bmp"
+        }
+    }
+}
+
+
+
+
+

@@ -1,0 +1,128 @@
+<!-- <div class="flex-item">
+    <a class="link" href="#game">Game Dev</a>
+</div>
+<div class="flex-item">
+    <a href="#music">Music</a>
+</div>
+<div class="flex-item">
+    <a class="link" href="#art">Programmatic Art</a>
+</div>
+<div class="flex-item">
+    <a class="link" href="#terra">Satellite Imagery</a>
+</div>
+<div class="flex-item">
+    <a class="link" href="#resume">Resume</a>
+</div>
+<div class="flex-item">
+    <a href="#pacer">Pacer App API Tests</a>
+</div>
+<div class="flex-item">
+    <a class="link" target="_blank" href="https://www.linkedin.com/in/robfau">Linkedin</a>
+</div> -->
+
+     <!-- <div id="home" class="page flex-item">
+                <div id="header">
+                    <h1>Robert Aucoin</h1>
+                    <hr>
+                </div>
+                <div id="content">
+                    Robert Aucoin, Software Developer
+                    <h5>made with Python and OpenCV</h5>
+                    <img src="/files/me.gif">
+                </div>
+            </div> -->
+
+        <!-- <div id="game" class="page flex-item">
+            <div id="header">
+                <h1>Prototype 2D Video Game Engine</h1>
+                <hr>
+            </div>
+            <div id="content">
+                <p>
+                    Made with <a href="http://wiki.libsdl.org/FrontPage">SDL 2.0</a>,
+                    compiled with <a href="https://emscripten.org/docs/compiling/Building-Projects.html?highlight=sdl2">Emscripten</a>
+                </p>
+                Last stable engine: <a target="_blank" href="/GameEngine2D">Pathfinding and interaction prototype</a>
+                New prototype engine: <a target="_blank" href="/engine_debug">Entity system and UI Prototype</a>
+                <hr>
+                <i>Legacy Versions:</i>
+                
+                <a target="_blank" href="/engines/engine/">Engine 1</a>
+            </div>
+        </div>
+
+        <div id="resume" class="page flex-item">
+            <div id="header">
+                <h1>Robert Aucoin Resume</h1>
+                <hr>
+            </div>
+            <div id="content">
+                <a target="_blank" style="" href="/files/Resume.pdf">Open in new tab</a>
+                <iframe src="/files/Resume.pdf"></iframe>
+                </div>
+        </div>
+        <div id="art" class="page flex-item">
+            <div id="header">
+                <h1>Programmatic/Generative Art</h1>
+                <hr>
+            </div>
+            <div id="content">
+                <span>Python with OpenCV</span>
+                <img loading="lazy" src="https://robauis.me/files/trip/output.gif">
+                <img loading="lazy" src="https://robauis.me/files/trip/output (3).gif">
+		        <span>multiple angles of a 3D panorama using Google Street View API</span>
+                <img loading="lazy" src="https://robauis.me/files/trip/-3.77.gif">
+                <img loading="lazy" src="https://robauis.me/files/trip/21.42.gif">
+                <img loading="lazy" src="https://robauis.me/files/trip/37.98.gif">
+                <img loading="lazy" src="https://robauis.me/files/trip/42.99.gif">
+                <img loading="lazy" src="https://robauis.me/files/trip/47.27.gif">
+                <img loading="lazy" src="https://robauis.me/files/trip/47.53.gif">
+                <img loading="lazy" src="https://robauis.me/files/trip/48.07.gif">
+                <img loading="lazy" src="https://robauis.me/files/trip/64.29.gif">
+            </div>
+        </div>
+        <div id="terra" class="page flex-item">
+            <div id="header">
+                <h1>Pseudo-Random Satellite Imagery Wallpaper Generator</h1>
+                <hr>
+            </div>
+            <div id="content">
+                <iframe src="/terra"></iframe>
+                </div>
+        </div>
+        <div id="rick" class="page flex-item">
+            <div id="header">
+                <h1>You Got Rick Rolled!</h1>
+                <hr>
+            </div>
+            <div id="content">
+                
+                <img src="/files/rick.gif">
+            </div>
+        </div>
+        <div id="music" class="page flex-item">
+            <div id="header">
+                <h1>Audio Doodles</h1>
+                <hr>
+            </div>
+            <div id="content">
+                Soundation tracks
+                <iframe src="/files/Robert,Aucoin_Resume.pdf" style="right:0; top:0; bottom:0; width:50%;"></iframe>
+                <iframe width="100%" height="130" src="https://soundation.com/player/e6k1f" frameborder="0" allowfullscreen></iframe>
+                <iframe width="100%" height="130" src="https://soundation.com/player/e6gfs" frameborder="0" allowfullscreen></iframe>
+                <iframe width="100%" height="130" src="https://soundation.com/player/e6d3c" frameborder="0" allowfullscreen></iframe>
+                <iframe width="100%" height="130" src="https://soundation.com/player/e695a" frameborder="0" allowfullscreen></iframe>
+                <iframe width="100%" height="130" src="https://soundation.com/player/e6958" frameborder="0" allowfullscreen></iframe>
+                <iframe width="100%" height="130" src="https://soundation.com/player/dmgo2" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div id="pacer" class="page flex-item">
+            <div id="header">
+                <h1>Pacer APP API Tests</h1>
+                <hr>
+            </div>
+            <div id="content">
+                Prototype Pacer API implementation in PHP
+                <a target="_blank" href="/pacer/?pacer">Open in new tab</a>
+            </div>
+        </div> -->
