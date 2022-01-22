@@ -28,22 +28,18 @@ function init(pageid) {
         headers: {
             'Content-Type': 'text/yaml',
         }
-    }).then(res => res.text())
-        .then(yaml => jsyaml.load(yaml))
-        .then(data => load_subjects(data))
-        //load the current subject
-        .then(load => load_page(pageid))
-        //add subject link click events
-        .then(events => {
-            $("body").on("click", ".link", function (e) {
-                switch (e.which) {
-                    case 1:
-                        load_page(e.target.hash.slice(1));
-                    default:
-                        break;
-                }
-            });
-        })
+    })
+    .then(res => res.text())
+    .then(yaml => jsyaml.load(yaml))
+    .then(data => load_subjects(data))
+    //load the current subject
+    .then(load => load_page(pageid))
+    //add subject link click events
+    .then(events => {
+        $(".link").on('click', function(e) {
+            load_page(e.target.hash.slice(1));
+        });
+    });
 }
 function load_page(id) {
     //redirect blank paths to home
@@ -107,7 +103,7 @@ function load_subjects(data) {
             subject = data.data[subject];
             Object.keys(subject).forEach(key => {
                 
-                if (key.indexOf("script") > -1) {
+                if (key.startsWith("script")) {
                     let script = subject[key];
                     
                     if (script.endsWith(".js"))
@@ -119,7 +115,13 @@ function load_subjects(data) {
                         $("#subject_block").append("<script>" + script + "<\/script>");
                     }
                 }
-            })
+
+                if (key.startsWith("style")) {
+                    let stylefile = subject[key];
+                    let stylesheet = $(`<link rel='stylesheet' href='${stylefile}'></link>`);
+                    $("head").append(stylesheet);
+                }
+            });
         }
         else {
             subject = data.data[subject];

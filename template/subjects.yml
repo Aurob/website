@@ -7,8 +7,8 @@ header:
 data:
 
   _global:
-    script_global_example: >
-      console.log("Global Script loaded");
+    script_global_example: console.log("Global Example Script loaded"); 
+    style_main: styles.css
   new:
     subject: Template
     id: template
@@ -20,4 +20,5 @@ data:
     width: 100%
     script_subject_example: >
         console.log("Subject Script loaded");
+    style_main: styles.css
 
