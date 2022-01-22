@@ -1,0 +1,73 @@
+<html>
+    <script>
+        window.onload = function() {
+            
+            var x = 0, y = 0; //width/2, y = height/2;
+            var ox = x - 5, oy = y - 5;
+            var dx, dy;
+
+            var G = .54;
+            var F = .999;
+            var B = .73;
+
+            var trail_length = 100;
+            var trail_cache = [];
+            
+            var canvas = document.createElement("canvas");
+            var ctx = canvas.getContext("2d");
+            var width = 1000, height = 1000;
+            canvas.width = width; canvas.height = height;
+
+            canvas.addEventListener("click", function(e) {
+            });
+            document.body.append(canvas);
+
+            function trail() {
+                trail_cache.forEach(function(pos) {
+                    ctx.globalAlpha = (1/(trail_cache.indexOf(pos))) * 4;
+                    ctx.fillStyle = "rgb(55, 255)"
+                    ctx.fillRect(pos[0], pos[1], 4, 4);
+                    ctx.fillStyle = "black"
+                    ctx.globalAlpha = 1;
+                });
+            }
+            function run() {
+                ctx.clearRect(0, 0,width, width);
+
+                dx = x - ox;
+                dy = y - oy;
+                ox = x, oy = y;
+
+                x += dx;
+                y += dy + G;
+
+                if(x > width) {
+                    x = width;
+                    ox = x + dx * B;
+                }
+                if(x < 0) {
+                    x = 0;
+                    ox = x + dx * B;
+                }
+                if(y > height) {
+                    y = height;
+                    oy = y + dy * B;
+                }
+                if(y < 0) {
+                    y = 0;
+                    oy = y + dy * B;
+                }
+
+                if(trail_cache.length > trail_length) trail_cache.pop();
+                trail_cache.reverse();
+                trail_cache.push([ox, oy]);
+                trail_cache.reverse();
+
+                ctx.fillRect(x, y, 10, 10);
+                trail();
+                window.requestAnimationFrame(run);
+            }
+            run();
+        }
+    </script>
+</html>
