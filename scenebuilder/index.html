@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="include/jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" href="include/bootstrap.min.css">
+        <script src="include/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="include/font-awesome.min.css">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-light bg-light">
+            <form class="container-fluid justify-content-start">
+                <button id="entity_menu" class="btn btn-success">Entities</button>
+                <button class="btn btn-outline-success me-2" type="button" id="export">Export</button>
+                <button class="btn btn-outline-success me-2" type="button" id="import">Import</button>
+                <button class="btn btn-outline-success me-2" type="button" id="undo" disabled>Undo</button>
+                <button class="btn btn-outline-success me-2" type="button" id="redo" disabled>Redo</button>
+            </form>
+        </nav>
+        <div id="main" class="container-fluid">
+            <div id="mainrow" class="row g-0">
+                <div id="menucol" class="col-1">
+                    <h2>Scenes</h2>
+                </div>
+                <div class="col-4">
+                    <canvas id="canvas"></canvas>
+                </div>
+            </div>            
+        </div>
+
+        <!-- Import Text Modal -->
+        <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="importLabel">Import a Scene(s)</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="obj_data">
+                            <textarea id="import_text"></textarea>
+                            <button id="import_btn" class="btn btn-secondary">Import</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Component Modal -->
+        <div class="modal fade" id="new_obj" tabindex="-1" aria-labelledby="new_objLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="new_objLabel">New Component</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="obj_data">
+                            <form id="obj_form"> 
+                                <input id="entity_id" hidden><input id="scene_id" hidden>
+                                <label for="component_list">Select a component:</label>
+                                <select id="component_list"></select>
+                                <div id="component_fields"></div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button id="add_obj" type="button" class="btn btn-primary">Add Component</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Export Modal-->
+        <div class="modal fade" id="show_export" tabindex="-1" aria-labelledby="exportLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exportLabel">Copy Exported Scene</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="export_body"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="scripts/script.js"></script>
+    <script src="scripts/menu.js"></script>
+    <script src="scripts/events.js"></script>
+    <script src="scripts/draw.js"></script>
+</html>

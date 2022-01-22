@@ -1,0 +1,109 @@
+html, body {
+    /* margin: auto 0; */
+    width: 100%;
+    /* height: 100%; */
+}
+#main {
+    float: left;
+}
+#main .row .col:nth-child(1) {
+    width: 10%;
+}
+.offcanvas {
+    position: inherit !important;
+    transition: transform .1s ease-in-out !important;
+    /* height: 100%; */
+}
+#menucol {
+    display: none;
+}
+.offcanvas-body {
+    /* height: 1000px; */
+    /* overflow-y: auto; */
+}
+#component_fields {
+    display: grid;
+}
+#main {
+    background-color: ivory;
+    border: maroon 2px solid;
+    height: 100%;
+    font-family: "Lucida Console", "Courier New", monospace;
+    text-transform: uppercase;
+}
+
+#menucol {
+    /* color: white; */
+    width: auto;
+    display: flex;
+    background: rgb(8,5,51);
+    background: radial-gradient(circle, rgb(195, 234, 240) 0%, rgb(5, 32, 37) 92%, rgb(0, 0, 0) 97%); 
+}
+
+.row .row {
+    padding-left: 1em;
+    /* background-color: lightslategray; */
+}
+.row .row .row {
+    padding-left: 1em;
+    /* background-color: rgb(107, 109, 98); */
+}
+.p-2{
+    height: 1.5em;
+    padding: 0 !important;
+}
+.fa {
+    font-size: 1.5em;
+}
+
+.d-flex .p-2:nth-child(1) {
+    background: rgb(8,5,5);
+    background: radial-gradient(circle, rgba(8,5,51,1) 0%, rgb(121, 119, 91) 92%, rgba(15, 15, 15,1) 97%); 
+}
+.d-flex .p-2:nth-child(2) {
+    background: rgb(8,5,5);
+    background: radial-gradient(circle, rgba(8,5,51,1) 0%, rgb(121, 119, 91) 92%, rgba(15, 15, 15,1) 97%); 
+}
+.d-flex .p-2:nth-child(3), .p-2:nth-child(4), .p-2:nth-child(5), .p-2:nth-child(6) {
+    background: rgb(8,5,5);
+    background: radial-gradient(circle, rgba(228,225,251,1) 0%, rgb(121, 119, 91) 92%, rgba(15, 15, 15,1) 97%); 
+}
+
+.d-flex .p-2:nth-child(2) p, i:not(.fa) {
+    color: white;
+}
+.d-flex .p-2 {
+    border-top: outset .1em black;   
+}
+.d-flex .p-2 {
+    border-right: dashed 1px black;
+}
+#row_root_0 :not(.p-2) {
+    /* padding-bottom: 1em; */
+}
+
+.fa-plus-square {
+    background: -webkit-radial-gradient(rgb(35, 46, 17),rgb(76, 234, 78));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.fa-times-circle {
+    background: -webkit-radial-gradient(rgb(235, 46, 17), rgb(276, 234, 78));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.fa-retweet {
+    background: -webkit-radial-gradient(rgb(63, 3, 58), rgb(276, 234, 78));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.fa-sort-up, .fa-sort-down {
+    color: white;
+}
+
+.col {
+    text-align: center;
+}

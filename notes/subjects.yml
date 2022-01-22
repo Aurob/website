@@ -1,0 +1,139 @@
+---
+header:
+  title: Notes
+  nav_logo: note.jpeg
+  media_path: ""
+  width: 100%
+data:
+
+  _global:
+    script_quill_settings: >
+      var quill;
+      var fontNames = [ "arial", "courier", "garamond", "tahoma", "times-new-roman", "verdana" ];
+      var toolbarOptions = [
+        ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+        ['blockquote', 'code-block'],
+
+        [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+        ['link', 'image'],      
+        [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+        [{ 'direction': 'rtl' }],                         // text direction
+
+        [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+        [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+        [{ 'font': fontNames }],
+        [{ 'align': [] }],
+
+        ['clean']                                         // remove formatting button
+      ];
+    script_preload_file: >
+      $(document).ready(function(){
+        let params = new URLSearchParams(window.location.search);
+        if(params.get('f')) {
+          $('#name').val(params.get('f'));
+          $('#key').val(params.get('k'));
+          load_note(params.get('f'), params.get('k'), params.get('h'));
+        }
+      });
+
+    script_load_note_func: > 
+      function load_note(name, key=false, html=false) {
+        let params = `o=load&f=${encodeURIComponent(name)}`;
+        if(key) params+=`&k=${encodeURIComponent(key)}`;
+        fetch(`index.php?${params}`)
+          .then(response => response.json())
+          .then(data => {
+            if(data.result) {
+              if(html) {
+                $("body").html(decodeURIComponent(data.result.content));
+              }
+              else {
+                quill.root.innerHTML = decodeURIComponent(data.result.content);
+                if(data.result.key) quill.enable()
+              }
+            }
+        });
+      }
+  new:
+    subject: New Note
+    id: new
+    title: New Note
+    sub_title: Create a new Note
+    content: >
+      <input placeholder='Title/Subject' id='title'>
+      <input placeholder='Optional Key' id='key'>
+      <div id='editor'>
+        New Notes!
+      </div>
+      <br>
+      <button id='save'>Save</button>
+    default: true
+    width: 100%
+    script_load_quill: >
+        quill = new Quill('#editor', {
+          modules: {
+              toolbar: toolbarOptions,
+              imageResize: {
+              }
+          },
+          theme: 'snow'
+        });
+    script_save_note: >
+      $('#save').click(function(){
+        let name = encodeURIComponent($('#title').val());
+        let key = encodeURIComponent($('#key').val());
+        let content = encodeURIComponent(quill.root.innerHTML);
+
+        let fd = new FormData();
+        fd.append('o', 'new');
+        fd.append('f', name);
+        fd.append('c', content);
+        if(key) fd.append('k', key);
+        fetch('index.php', 
+          {method: "POST", body: fd})
+          .then(res=>res.json())
+          .then(data=> {
+            alert(data.result);
+          });
+      });
+
+  #Load an existing note
+  #notes can be loaded by either entering a value in the html input
+  # or by including the ?f parameter and a value in the URL
+  #notes can only be edited by including the ?k parameter and a valid key value in the URL
+  load:
+    subject: Load Note
+    id: load
+    title: Load a saved noted
+    sub_title: Enter your note key below!
+
+    content: >
+      <input placeholder='Note Name' id='name'>
+      <input placeholder='Optional Key' id='key'>
+      <br>
+      <button id='loadnote'>Load</button>
+      <div id="editor"></div>
+    script_load_quill: >
+      quill = new Quill('#editor', {
+        modules: {
+            toolbar: toolbarOptions,
+            imageResize: {
+            }
+        },
+        theme: 'snow'
+      });
+      quill.disable(false);
+    script_check_key: >
+      function check_key(key) {
+
+      }
+    script_load_note_btn: >
+      $('#loadnote').click(function(){
+        let value = $('#name').val();
+        let key = $('#key').val();
+        load_note(value, key);
+      });

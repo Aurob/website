@@ -1,0 +1,51 @@
+{
+    "id" : 0,
+    "name" : "title",
+    "cursor" : true,
+    "fps" : true,
+    "entities" : [
+        {
+            "components" : [
+                {
+                    "type" : 0,
+                    "x" : "w/2", 
+                    "y" : "h/2" 
+                },
+                {
+                    "type" : 1,
+                    "w" : 20,
+                    "h" :10,
+                    "color" : "GREY"
+                }
+            ]
+        },
+        {
+            "components" : [
+                {
+                    "type" : 0,
+                    "x" : "w/2", 
+                    "y" : "h/2"
+                },
+                {
+                    "type" : 1,
+                    "w" : 100,
+                    "h" : 25,
+                    "color" : "GREY"
+                },
+                {
+                    "type" : 2,
+                    "text" : " START",
+                    "size" : 25
+                },   
+                {
+                    "type" : 3,
+                    "interaction" : 0
+                },
+                {
+                    "type" : 4,
+                    "to" : 1
+                }
+            ]
+        }
+    ]
+}

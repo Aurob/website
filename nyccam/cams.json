@@ -1,0 +1,32 @@
+{
+    "tsnorth_hd": 
+    {
+        "base" : "https://d3o4twxzdiwvsf.cloudfront.net/fecnetwork/485.flv/media-uug75r17k_",
+        "end" : ".ts"
+    },
+    "tstwo_hd": 
+    {
+        "base" : "https://d3o4twxzdiwvsf.cloudfront.net/fecnetwork/4017timessquare.flv/media-usvsjdnld_",
+        "end" : ".ts"
+    },
+    "tstwo_hd2": 
+    {
+        "base" : "https://d3o4twxzdiwvsf.cloudfront.net/fecnetwork/1415.flv/media-u0iknqy43_",
+        "end" : ".ts"
+    },
+    "midtown4k": 
+    {
+        "base" : "https://videos-3.earthcam.com/fecnetwork/13903.flv/media_w450563217_",
+        "end" : ".ts?t=IbjqQPqQhj6%2FAu7b5bDdwLe0jVwKWLCNOG74UDnHw6b0h%2BaUcXdDPq4hEeOSmV5G"
+    },
+    "tsrobo3": 
+    {
+        "base" : "https://d3o4twxzdiwvsf.cloudfront.net/fecnetwork/15559.flv/media-u38y1t9w2_",
+        "end" : ".ts"
+    },
+    "tsrobo1": 
+    {
+        "base" : "https://d3o4twxzdiwvsf.cloudfront.net/fecnetwork/hdtimes10.flv/media-ub76glkio_",
+        "end" : ".ts"
+    }
+}
