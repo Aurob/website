@@ -1,0 +1,339 @@
+
+#include <emscripten.h>
+#include <cstdlib>
+#include <time.h>
+#include <math.h>
+#include <stdlib.h>
+#include <unordered_map>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <stdio.h>
+#include <iostream>
+#include <stdlib.h>
+#include<set>
+#include <algorithm>
+
+using namespace std;
+
+struct context
+{
+    SDL_Renderer *renderer;
+    int iteration;
+};
+
+//View
+float WIDTH = 1920;
+float HEIGHT = 1080;
+float tilesize = 64;
+
+//Mouse
+bool mousedown = false;
+int mousex, mousey;
+int mouse_tilex;
+int mouse_tiley;
+int _x;
+float alt;
+bool clickblock = false;
+
+//Paths
+pair<float, float> start;
+pair<float, float> endp;
+bool start_set = false;
+bool end_set = false;
+
+int SDLCALL EventHandler(void *userdata, SDL_Event *event) {
+    switch(event->type) {
+        case SDL_MOUSEMOTION:
+            mousex = event->motion.x;
+            mousey = event->motion.y;             
+            break;
+
+        case SDL_MOUSEBUTTONDOWN:
+            mousedown = true;
+            alt = 1.3;
+            break;   
+
+        case SDL_MOUSEBUTTONUP:
+            mousedown = false;
+            clickblock = false;
+            alt = 1;
+            break;
+    }
+
+    return -1;
+}
+
+
+typedef pair<int,unsigned long long> PII;
+typedef vector<PII> VPII;
+typedef vector<VPII> VVPII;
+
+unordered_map<unsigned long long, vector<unsigned long long>> path_nodes;
+unordered_map<int, vector<pair<int, int>>> dest_paths;
+vector<pair<int, int>> nodes; 
+void DijkstrasShortestPath (int source_node, int node_count, VVPII& graph, vector<pair<int, int>> nodes, pair<int, int> dest) {
+
+    path_nodes.clear();
+    // Assume that the distance from source_node to other nodes is infinite 
+    // in the beginnging, i.e initialize the distance vector to a max value
+    const long long INF = 999999999999;
+    vector<unsigned long long> dist(node_count, INF);
+    set<PII> set_length_node;
+    
+    // Distance from starting vertex to itself is 0
+    dist[source_node] = 0;
+    set_length_node.insert(PII(0,source_node));
+
+    dest_paths.clear();
+    
+    while (!set_length_node.empty()) {
+
+        PII top = *set_length_node.begin();
+        set_length_node.erase(set_length_node.begin());
+
+        int source_node = top.second;
+        
+        int shortest = static_cast<int>(INF);
+        pair<int, int> shortest_node;
+        bool is_dest_path = false;
+
+        vector<pair<int, int>> paths;
+        for(auto& it : graph[source_node]) {
+            
+            
+            //path_nodes[source_node].push_back(it.first);
+            int adj_node = it.first;
+            int length_to_adjnode = it.second;
+
+            // Edge relaxation 
+            if (dist[adj_node] > length_to_adjnode + dist[source_node]) {
+    
+                // If the distance to the adjacent node is not INF, means the pair <dist, node> is in the set
+                // Remove the pair before updating it in the set.
+                if (dist[adj_node] != INF) {
+                   set_length_node.erase(set_length_node.find(PII(dist[adj_node],adj_node))); 
+                }
+                
+                
+                dist[adj_node] = length_to_adjnode + dist[source_node];
+                if(dist[adj_node] < shortest) {
+                    shortest = adj_node;
+                    //shortest_node = adj_node;
+                }
+                set_length_node.insert(PII(dist[adj_node], adj_node));
+            }
+
+            paths.push_back({adj_node, dist[adj_node]});
+        }
+
+        dest_paths[source_node] = paths;
+    }   
+    
+}
+
+void load_graph(pair<int, int> dest) {
+    nodes.clear();
+    vector<pair<int, int>> nodes2;
+    vector<VPII> graph;
+
+    int index{};
+    for(int w = 0; w < static_cast<int>(WIDTH/tilesize); ++w) {
+        for(int h = 0; h < static_cast<int>(HEIGHT/tilesize); ++h) {
+            nodes.push_back({w, h});
+            index++;
+        }
+    }
+
+    // for(auto ir = nodes.rbegin(); ir != nodes.rend(); ++ir) {
+    //     nodes2.push_back(*ir);
+    // }
+
+    for(auto & c : nodes) {
+        //get the index of each adjacent tile
+        vector<pair<int, int>> neighbors{
+            {c.first-1, c.second}, {c.first+1, c.second}, 
+            {c.first-1, c.second-1}, {c.first+1, c.second-1},
+            {c.first, c.second-1}, {c.first, c.second+1}, 
+            {c.first-1, c.second+1}, {c.first+1, c.second+1}
+        };
+
+        VPII neigh_nodes;
+        vector<int> valid;
+        vector<pair<int, int>>::iterator it;
+        int index;
+
+        for(auto n : neighbors) {
+            it = find(nodes.begin(), nodes.end(), n);
+            if(it != nodes.end()) {
+                index = distance(nodes.begin(), it);
+                neigh_nodes.push_back({index, 1});
+            }
+        }
+
+        graph.push_back(neigh_nodes);
+    }
+
+    int node_count  = static_cast<int>(WIDTH/tilesize)*static_cast<int>(HEIGHT/tilesize);
+    int source_node = 0;
+    DijkstrasShortestPath(source_node, node_count, graph, nodes, dest);
+}
+
+
+bool initialized{false};
+void mainloop(void *arg)
+{   
+    SDL_Event event;
+    //Handle events
+    while (SDL_PollEvent(&event)) {
+        EventHandler(0, &event);
+    }
+
+    for(int i = 0; i < WIDTH/tilesize + 1; i++){
+        //Unnecessary re-initialization 
+        _x = i*static_cast<int>(tilesize);
+        
+        if(mousex > _x){
+            mouse_tilex = _x;
+        }
+    }
+    for(int i = 0; i < HEIGHT/tilesize + 1; i++){
+        //Unnecessary re-initialization 
+        _x = i*static_cast<int>(tilesize);
+        
+        if(mousey > _x){
+            mouse_tiley = _x;
+        }
+    }
+
+    if(mousedown && !clickblock) {
+        if(!start_set) {
+            start_set = true;
+            start = {mouse_tilex, mouse_tiley};
+        }
+        else {
+            if(mouse_tilex == start.first && mouse_tiley == start.second) {
+                start_set = false; 
+                end_set = false;
+            }
+            else {
+                if(!end_set) {
+                    end_set = true;
+                    endp = {mouse_tilex, mouse_tiley};
+                }
+                else if(mouse_tilex == endp.first && mouse_tiley == endp.second) end_set = false; 
+            }
+        }
+        clickblock = true;
+    }
+    
+
+    context *ctx = static_cast<context*>(arg);
+    SDL_Renderer *renderer = ctx->renderer;
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255 );
+    SDL_RenderClear(renderer);
+
+    SDL_Rect temp_rect;
+    
+    for(float x = 0; x < WIDTH/tilesize; ++x) {
+        for(float y = 0; y < HEIGHT/tilesize; ++y) {
+
+            temp_rect.w = tilesize;
+            temp_rect.h = tilesize;
+            temp_rect.x = (x*tilesize);
+            temp_rect.y = (y*tilesize);
+
+            if(x == start.first && y == start.second) SDL_SetRenderDrawColor(renderer, 0, 222, 0, 255 );
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255 );
+            SDL_RenderFillRect(renderer, &temp_rect);
+
+            temp_rect.w = tilesize - (tilesize/20);
+            temp_rect.h = tilesize - (tilesize/20);
+            temp_rect.x = (x*tilesize) + (tilesize/20);
+            temp_rect.y = (y*tilesize) + (tilesize/20);
+
+            SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255 );
+            SDL_RenderFillRect(renderer, &temp_rect);
+
+        }
+    }
+
+    temp_rect.w = tilesize;
+    temp_rect.h = tilesize;
+    temp_rect.x = mouse_tilex;
+    temp_rect.y = mouse_tiley;
+
+    SDL_SetRenderDrawColor(renderer, 123*alt, 123*alt, 123*alt, 255 );
+    SDL_RenderFillRect(renderer, &temp_rect);
+
+    if(start_set) {
+        temp_rect.w = tilesize;
+        temp_rect.h = tilesize;
+        temp_rect.x = start.first;
+        temp_rect.y = start.second;
+        SDL_SetRenderDrawColor(renderer, 3, 222, 1, 255 );
+        SDL_RenderFillRect(renderer, &temp_rect);
+
+        if(end_set) {
+            temp_rect.w = tilesize;
+            temp_rect.h = tilesize;
+            temp_rect.x = endp.first;
+            temp_rect.y = endp.second;
+            SDL_SetRenderDrawColor(renderer, 224, 2, 1, 255 );
+            SDL_RenderFillRect(renderer, &temp_rect);
+        }
+    }
+
+    
+    if(start_set && end_set) {
+        load_graph({static_cast<int>(endp.first/tilesize),static_cast<int>(endp.second/tilesize)});
+        pair<int, int> dest = {static_cast<int>(endp.first/tilesize),static_cast<int>(endp.second/tilesize)};
+        int index = 0;
+        for(auto p : dest_paths) {
+            //cout << p.first << ": " << endl;
+            for(auto pp : p.second) {
+                temp_rect.w = tilesize;
+                temp_rect.h = tilesize;
+                temp_rect.x = pp.first*tilesize;
+                temp_rect.y = pp.second*tilesize;
+                SDL_SetRenderDrawColor(renderer, 2*index, 3*index, 4*index, 255 );
+                SDL_RenderFillRect(renderer, &temp_rect);
+            }
+            ++index;
+            //cout << endl;
+            
+        }
+    }
+    //finally draw everything to the screen
+    SDL_RenderPresent(renderer);
+    ctx->iteration++;
+}
+
+
+int main(int argc, char *argv[])
+{
+    srand(time(NULL));
+
+    SDL_Init(SDL_INIT_VIDEO);
+    SDL_Window *window;
+    SDL_Renderer *renderer;
+    SDL_CreateWindowAndRenderer(WIDTH, HEIGHT, 0, &window, &renderer);
+
+    context ctx;
+    ctx.renderer = renderer;
+    ctx.iteration = 0;
+
+    const int simulate_infinite_loop = 1; // call the function repeatedly
+    const int fps = -1; // call the function as fast as the browser wants to render (typically 60fps)
+    //emscripten_run_script("var ws = new WebSocket('wss://robauis.me/ws'); ws.onmessage = (e)=>{console.log(e.data);}");
+
+    emscripten_set_main_loop_arg(mainloop, &ctx, fps, simulate_infinite_loop);
+    
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+
+    return EXIT_SUCCESS;
+}

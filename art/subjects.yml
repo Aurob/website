@@ -1,0 +1,57 @@
+---
+header:
+  title: Art
+  nav_logo: ''
+  media_path: ''
+  width: 100%
+data:
+  art:
+    subject: Art
+    id: art
+    title: >
+      Art
+    
+    sub_title: >
+      <button id="new_art">New Art</button>
+    
+    content: >
+      <div id="art">
+        <img id="art_img">
+        <p id="art_label"></p>
+        <p id="art_desc"></p>
+      </div>
+
+    script_art_button: >
+      $("#new_art").click(function(){load_art();});
+    
+    script_load_artists: >
+      var artists;
+      fetch('artists.json')
+        .then(res=>res.json())
+        .then(data=>{
+          artists = data;
+        });
+
+    script_get_art: >
+      function get_art() {
+        let artist = Math.floor(Math.random() * artists.length);
+        let work = Math.floor(Math.random() * artists[artist].works.length);
+        let art = artists[artist].works[work];
+        if(!art["image_url"].endsWith(".jpg")) {
+          return get_art();
+        }
+        return art;
+      }    
+
+    script_load_art: >
+      function load_art() {
+        let art = get_art();
+        console.log("Loading "+JSON.stringify(art));
+        $("#art_img").attr("src", art["image_url"]);
+      }
+
+    script_init: >
+      load_art();
+
+    default: true
+    width: 100%
