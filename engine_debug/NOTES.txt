@@ -1,0 +1,29 @@
+Main Components:
+    Position
+        Global position
+        Tile position
+        Screen position
+        
+    Rendered
+        Width
+        Height
+        Visible
+
+    Movement
+        Speed
+        Direction
+
+    Durability
+        Current
+    
+    Control
+        Active
+
+
+Entities:
+    User
+        Position
+        Rendered
+        Movement
+        Control
+

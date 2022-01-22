@@ -1,0 +1,19 @@
+---
+header:
+  title: Spotify API
+  nav_logo: https://4.bp.blogspot.com/-zhoalMs5Jqs/VRUQL-bMq9I/AAAAAAAAsh0/SMv19Kf7AFI/s400/music_ongaku_kansyou.png
+  media_path: ""
+  width: 100%
+data:
+
+  _global:
+    script_global_load_spotify: spotify.js
+  new:
+    subject: Current Song
+    id: current
+    title: What I'm listening to now
+    sub_title: Using Spotify API
+    content: <div id="current-song"></div>
+    default: true
+    width: 100%
+
