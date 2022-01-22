@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Example</title>
+</head>
+<body>
+    <script>
+
+        var ws = null;
+        var connected = false;
+        var open = function() {
+            var url = "wss://robauis.me/ws/";
+            ws = new WebSocket(url);
+            // ws.onclose = onClose;
+            ws.onmessage = onMessage;
+            // ws.onerror = onError;
+        };
+
+        var onMessage = function(event) {
+            var data = event.data;
+            console.log(data);
+        };
+    </script>
+    </body>
+</html>

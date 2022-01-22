@@ -1,0 +1,31 @@
+{
+    "header": {
+        "title": "RobAu",
+        "nav_logo":"",
+        "media_path": "/files/"
+    },
+    "data":
+    {
+        "servers" : {
+            "subject":"Servers",
+            "id":"lobby",
+            "title":"Browse Servers",
+            "sub_title":"Click <small>Load</small> and then select a server to join, select it again to leave",
+            "content_btn":"<button id='srvbtn'>Load Servers</button>",
+            "content":"<div id='data'></div>",
+            "script":"s1.js",
+            "nav_logo":"rotate.js",
+            "default": true,
+            "width":"100%"
+        },
+        "home" : {
+            "subject":"Home",
+            "id":"home"
+        }
+    }
+}
+
+
+
+
+

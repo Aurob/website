@@ -1,0 +1,9 @@
+{
+    "root":{
+        "members":{
+            "bot":{
+                "admin":true
+            }
+        }
+    }
+}
