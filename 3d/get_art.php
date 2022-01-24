@@ -12,16 +12,7 @@ if(isset($_GET['count'])){
 }
 
 $art_list = [];
-if($art_count == 'test') {
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-    $url = 'https://mdl.artvee.com/hdl/226621fg.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=MZIIT36VLAXUDXH6Q7YL%2F20220114%2Fnyc3%2Fs3%2Faws4_request&X-Amz-Date=20220114T024512Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Signature=685e928974fe5b041b4209e381df6fc3e2ebd2669d01f5ab9ee24b8a13df9233';
-    $img = file_get_contents($url);
-    $b64image = "data:image/jpeg;base64," . base64_encode($img);
-    array_push($art_list, $b64image);
-}
-else if($art_count > 0) {
+if($art_count > 0) {
     
     $art_ids = [];
     // $artists = json_decode(file_get_contents("artists.json"), true);
