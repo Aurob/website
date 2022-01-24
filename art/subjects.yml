@@ -5,6 +5,9 @@ header:
   media_path: ''
   width: 100%
 data:
+  _global:
+    script: >
+      var artists = {};
   art:
     subject: Art
     id: art
@@ -24,14 +27,6 @@ data:
     script_art_button: >
       $("#new_art").click(function(){load_art();});
     
-    script_load_artists: >
-      var artists;
-      fetch('artists.json')
-        .then(res=>res.json())
-        .then(data=>{
-          artists = data;
-        });
-
     script_get_art: >
       function get_art() {
         let artist = Math.floor(Math.random() * artists.length);
@@ -49,9 +44,13 @@ data:
         console.log("Loading "+JSON.stringify(art));
         $("#art_img").attr("src", art["image_url"]);
       }
-
-    script_init: >
-      load_art();
+    
+    script_load_artists: >
+      fetch('artists.json')
+        .then(res=>res.json())
+        .then(data=>{
+          artists = data;
+        }).then(()=>{load_art()});
 
     default: true
     width: 100%
