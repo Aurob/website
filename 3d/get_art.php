@@ -1,10 +1,26 @@
 <?php
-header('Content-Type: application/json');
+// header('Content-Type: application/json');
 
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
+if(isset($_GET['test'])) {
+ 
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+    $rand_row = rand(0, 100);
+    
+    $db = new SQLite3('/var/www/html/art/artvee.db');
+    $res = $db->query('tables');
+    $return = [];
+    while ($row = $res->fetchArray()) {
+        // $url = $row['link'];
+        // $img = file_get_contents($url);
+        // $b64image = "data:image/jpeg;base64," . base64_encode($img);
+        // $return['size'] = getimagesize($b64image);
+        $return = $row;
+    }
 
+    echo json_encode($return);
+}
 $response = array();
 $art_count = 0;
 
