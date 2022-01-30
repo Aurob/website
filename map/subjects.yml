@@ -1,0 +1,35 @@
+---
+#For future data upgrades see: https://github.com/j-ane/trail-data
+header:
+  title: Map
+  nav_logo: https://4.bp.blogspot.com/-J0ndBrAVtNM/Wn1WBlE0alI/AAAAAAABKHE/N977kGZO0FoDzPcJuXO-WMmk4QIOwRPzwCLcBGAs/s450/map_open.png
+  media_path: ""
+  width: 100%
+data:
+
+  _global:
+    style_font: https://fonts.googleapis.com/css?family=Raleway
+    style_main: styles.css
+  main:
+    subject: Map
+    id: main
+    title: Map
+    sub_title: <a target='_blank' href='https://robauis.me/notes?o=load&f=map&h=1'>Dev Links</a>
+    default: true
+    width: 100%
+    content: <h2>Leaflet Map test</h2>
+    content_form: >
+      <div id='search_form'>
+        <input id='query'>
+        <button id="q-btn">Search</button>
+      </div>
+      <div id='trails_form'>
+        <button id="t-btn">Show Trails</button>
+      </div>
+      <div id='poi_form'>
+        <button id="p-btn">Show POI</button>
+      </div>
+    content_map: <div id="map"></div> 
+    style_map: >
+      #map { height: 50em; }
+    script_map: map.js
